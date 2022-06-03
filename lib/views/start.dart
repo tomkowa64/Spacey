@@ -137,7 +137,8 @@ class Start extends StatelessWidget {
                             width: 180,
                             height: 50,
                             child: TextButton(
-                                onPressed: () {},
+                                onPressed: () => Navigator.pushReplacementNamed(
+                                    context, 'Home'),
                                 style: ButtonStyle(
                                     shape: MaterialStateProperty.all(
                                         BeveledRectangleBorder(
