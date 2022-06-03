@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:spacey/views/home.dart';
 
@@ -22,23 +20,10 @@ class NavigationDrawer extends StatelessWidget {
               children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    new Text(
-                      "Spacey",
-                      style: TextStyle(
-                          fontSize: 40,
-                          color: const Color(0xff303744),
-                          fontStyle: FontStyle.italic,
-                          fontFamily: "Lucida Calligraphy Italic"),
-                    )
-                  ],
+                  children: [],
                 )
               ],
             ),
-          ),
-          Divider(
-            height: 1,
-            thickness: 1,
           ),
           ListTile(
               leading: Icon(Icons.home),
