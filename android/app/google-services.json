@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "162599218708",
+    "firebase_url": "https://spacey-4a081-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "spacey-4a081",
+    "storage_bucket": "spacey-4a081.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162599218708:android:d79f52f0ddd6cb5b704101",
+        "android_client_info": {
+          "package_name": "com.kj.spacey"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162599218708-h8bcfugf2vaqqauhi9ek4la59oiorspq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQ_fB3s23ymRfKlwKUcsIuGJMNBa-l0b0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162599218708-h8bcfugf2vaqqauhi9ek4la59oiorspq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
