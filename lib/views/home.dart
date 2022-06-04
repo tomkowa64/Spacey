@@ -11,6 +11,7 @@ class Home extends StatelessWidget {
     return Scaffold(
       drawer: NavigationDrawer(),
       resizeToAvoidBottomInset: false,
+      backgroundColor: Color.fromRGBO(42, 59, 113, 1),
       body: Container(
           padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
           height: MediaQuery.of(context).size.height,
