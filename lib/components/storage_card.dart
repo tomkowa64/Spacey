@@ -2,14 +2,15 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pie_chart/pie_chart.dart';
 
 class StorageCard extends StatelessWidget {
   late String _storageName;
-  late String _storageStatus;
   late String _storageCity;
   late String _storageDescription;
   late int _storageCurrentCapacity;
   late int _storageMaxCapacity;
+  late double _storageStatus;
 
   StorageCard(this._storageName, this._storageCity, this._storageDescription,
       this._storageCurrentCapacity, this._storageMaxCapacity);
@@ -20,16 +21,19 @@ class StorageCard extends StatelessWidget {
     _storageName = value;
   }
 
-  String get storageStatus => _storageStatus;
+  double get storageStatus => _storageStatus;
 
   setStorageStatus(String value) {
-    if (_storageCurrentCapacity / _storageMaxCapacity < 0.25) {
-      _storageStatus = "Light";
-    } else if (_storageCurrentCapacity / _storageMaxCapacity < 0.50) {
-      _storageStatus = "Average";
-    } else {
-      _storageStatus = "Overloaded";
-    }
+    _storageStatus = _storageCurrentCapacity / _storageMaxCapacity;
+  }
+
+  Map<String, double> getDataForPieChart() {
+    int remainingSpace = _storageMaxCapacity - _storageCurrentCapacity;
+    Map<String, double> dataMap = {
+      "Occupied": _storageCurrentCapacity.toDouble(),
+      "Free": remainingSpace.toDouble(),
+    };
+    return dataMap;
   }
 
   String get storageCity => _storageCity;
@@ -94,27 +98,21 @@ class StorageCard extends StatelessWidget {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      if (_storageStatus == "Light")
-                                        CircleAvatar(
-                                          child: Text(""),
-                                          radius: 35,
-                                          backgroundColor: Colors.green,
-                                        )
-                                      else if (_storageStatus == "Average")
-                                        CircleAvatar(
-                                          child: Text(""),
-                                          radius: 35,
-                                          backgroundColor: Colors.yellow,
-                                        )
-                                      else
-                                        CircleAvatar(
-                                          child: Text(""),
-                                          radius: 35,
-                                          backgroundColor: Colors.red,
-                                        )
+                                      PieChart(
+                                        dataMap: getDataForPieChart(),
+                                        animationDuration:
+                                            Duration(milliseconds: 800),
+                                        legendOptions: LegendOptions(
+                                          showLegends: false,
+                                        ),
+                                        chartValuesOptions: ChartValuesOptions(
+                                          showChartValueBackground: false,
+                                          showChartValues: false,
+                                        ),
+                                      )
                                     ],
                                   ),
-                                  flex: 2),
+                                  flex: 3),
                               Flexible(
                                 child: SizedBox(
                                   width: 20,
@@ -165,20 +163,39 @@ class StorageCard extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  flex: 6),
+                                  flex: 8),
                               Flexible(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Text('${_storageCurrentCapacity}'),
-                                    Divider(color: Colors.black),
-                                    Text(
-                                      '${_storageMaxCapacity}',
-                                    )
+                                    if (_storageStatus < 0.25)
+                                      Text(
+                                        '${(_storageStatus * 100).toStringAsFixed(2)}%',
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.green),
+                                      )
+                                    else if (_storageStatus < 0.50)
+                                      Text(
+                                        '${(_storageStatus * 100).toStringAsFixed(2)}%',
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.amber),
+                                      )
+                                    else
+                                      Text(
+                                        '${(_storageStatus * 100).toStringAsFixed(2)}%',
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.red),
+                                      )
                                   ],
                                 ),
-                                flex: 1,
+                                flex: 3,
                               )
                             ],
                           ),
